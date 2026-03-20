@@ -3,6 +3,7 @@
 - github:<https://github.com/chenwuyou2012/Trigonometric-Functions>
 - 洛谷:<https://www.luogu.com.cn/article/290qc7qh>
 - 或:<https://www.luogu.me/article/290qc7qh>
+
 这些证明都是陈无忧一手自己证明出来的  
 如果你看不懂某些东西，请看这，这里是**救助站**
 -  $k\in Z $表示 $k $是**整数**
