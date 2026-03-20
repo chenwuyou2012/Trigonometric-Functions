@@ -1,0 +1,388 @@
+# __**三角函数**__
+# 前言
+- github:<https://github.com/chenwuyou2012/Trigonometric-Functions>
+- 洛谷:<https://www.luogu.com.cn/article/290qc7qh>
+- 或:<https://www.luogu.me/article/290qc7qh>
+这些证明都是陈无忧一手自己证明出来的  
+如果你看不懂某些东西，请看这，这里是**救助站**
+- $k\in \Z$表示$k$是**整数**
+- $k\in \N$表示$k$是**自然数**，即**非负整数**
+- $k\in \N^+$表示$k$是**非零自然数**，即**正整数**
+- $\sin^k\alpha=(\sin\alpha)^k(k\in \N^+),\cos,\tan$等同理
+- 在某些场合中可以看到$\sin^{-1}\alpha$，与上面不同$\sin^{-1}\alpha=\arcsin\alpha$，$\arcsin$的定义在竞赛&大学部分，$\cos,\tan$等同理
+- $\forall$的中文是**任意**  ，$\exists$的中文是**存在**，$\in$的中文是**属于**
+- $\{\forall k\in \Z\mid \alpha+k\times 360^\circ\}$你可以简单认为是**对于所有满足$k$是整数的$\alpha+k\times 360^\circ$的一个大集合**
+- **左闭右闭**区间$[l,r]$表示区间$l\le ... \le r$，**左开右闭**区间$(l,r]$表示区间$l< ... \le r$，**左闭右开**区间$[l,r)$表示区间$l\le ... <r$，**左开右开**区间$(l,r)$表示区间$l< ... <r$
+- $\sin^{(k)}$，表示$\sin$的$k$阶导数
+- $\sum\limits_{i=l}^r f(i)$表示$f(l)+f(l+1)+...+f(r-1)+f(r)$
+- $D\subseteq I$表示集合$I$包含集合$D$，$D\subset I$表示集合$I$真包含集合$D$（就是$D$不等于$I$）
+  
+1. 不会集合论，无所谓，实在不行看<http://oi-wiki.com/intro/symbol/#%E9%9B%86%E5%90%88%E8%AE%BA>
+2. 不会高等数学（微积分），很正常，等到大学再学吧（到了大学只要不是纯文科，会学线性代数，高等数学，概率）
+3. 物理可能会用到的双曲函数在竞赛部分
+4. 更想深入的话可以上网查找资料，看书或问周边的高手
+5. 你可以在<https://www.luogu.com.cn/article/290qc7qh>上看到本专栏，如果已经公开的话
+
+**由于是我纯手搓的，如有问题，敬请谅解，谢谢你的观看，欢迎同学们交流**
+# 三角函数初中部分
+## 定义
+我们发现，在两个直角三角形中，若其中一个角相等，则它们相似，边成比例，如
+![](https://cdn.luogu.com.cn/upload/image_hosting/srh6q01c.png)  
+已知$\angle C=\angle F=90^\circ$，$\angle A=\angle D$，有$\triangle ABC \sim \triangle DEF$，$\frac a c=\frac d f$，$\frac b c=\frac e f$，$\frac a b=\frac d e$，$......$
+就是说，如果已知$\angle A$或$\angle D$就可以知道线段的比例，那么我们以$\triangle ABC$为例，令
+
+- $\sin \angle A=\frac a c$
+- $\cos \angle A=\frac b c$
+- $\tan \angle A=\frac a b$
+
+常见的特殊值
+
+|   |$\sin$|$\cos$|$\tan$|
+|:-:|:-:|:-:|:-:|
+|$30^\circ$|$\frac 1 2$|$\frac{\sqrt 3}2$|$\frac{\sqrt 3}3$|
+|$45^\circ$|$\frac {\sqrt 2}2$|$\frac {\sqrt 2}2$|$1$|
+|$60^\circ$|$\frac{\sqrt 3}2$|$\frac 1 2$|$\sqrt 3$|
+
+~~初中课本好像到这里就差不多没了~~
+
+## 一些推导
+- $\tan \angle A=\frac {\sin \angle A} {\cos \angle A}$
+>#### 证明
+>$\frac {\sin \angle A} {\cos \angle A}=\frac {\frac a c} {\frac b c}=\frac a b=\tan \angle A$
+
+- $\sin^2\angle A+\cos^2\angle A=1$
+>#### 证明
+>$\sin^2\angle A+\cos^2\angle A=(\sin\angle A)^2+(\cos\angle A)^2=\frac {a^2} {c^2}+\frac {b^2} {c^2}$  
+>由勾股定理$a^2+b^2=c^2$，得$原式=\frac {c^2} {c^2}=1$
+- ### 正弦定理
+对于任意三角形$\triangle ABC$角$A,B,C$对边分别为$a,b,c$,有  
+$\frac a {\sin \angle A}=\frac b {\sin \angle B}=\frac c {\sin \angle C}$
+>#### 证明
+>![](https://cdn.luogu.com.cn/upload/image_hosting/lrotmc1o.png)  
+>做辅助线使$BD\perp AC$  
+>$BD=k=c\times\sin\angle A$  
+>则$S_{\triangle ABC}=\frac 1 2 bk=\frac 1 2 bc\times\sin\angle A=\frac 1 2 ac\times\sin\angle B=\frac 1 2 ab\times\sin\angle C$  
+>移项得$\frac a {\sin \angle A}=\frac b {\sin \angle B}=\frac c {\sin \angle C}$
+
+- ### 余弦定理
+对于任意三角形$\triangle ABC$角$A,B,C$对边分别为$a,b,c$,有  
+$\cos \angle A=\frac {b^2+c^2-a^2} {2bc}$  
+$\cos \angle B=\frac {a^2+c^2-b^2} {2ac}$  
+$\cos \angle C=\frac {a^2+b^2-c^2} {2ab}$  
+>#### 证明
+>![](https://cdn.luogu.com.cn/upload/image_hosting/k6xm3z56.png)  
+>做辅助线使$BD\perp AC$   
+>$AD=b-l=\cos\angle A\times c$  
+>由勾股定理$BD^2+AD^2=AB^2$，$BD^2+CD^2=BC^2$  
+>相减得$AD^2-CD^2=AB^2-BC^2$  
+>$b^2+l^2-2bl-l^2=c^2-a^2$  
+>$b^2-2bl=c^2-a^2$  
+>$\frac {b^2+a^2-c^2} {2b}=l$  
+>$AD=b-l=\frac {2b^2}{2b}-\frac {b^2+a^2-c^2} {2b}=\frac {b^2+c^2-a^2}{2b}=\cos\angle A\times c$  
+>$\cos\angle A=\frac {b^2+c^2-a^2}{2bc}$
+>其它同理
+
+# 三角函数高中部分
+## 任意角的定义
+初中的角的定义为具有公共端点的两条射线的图形叫角  
+高中部分是一条射线绕其端点旋转之后形成的图形叫角  
+其中顺时针旋转为正角，逆时针旋转为负角，不转为零角  
+开始的时候成为始边，结束的边成为终边  
+以$x$轴正方向为始边，图示
+![](https://cdn.luogu.com.cn/upload/image_hosting/qnclv1r9.png)  
+所以角可以是任意实数  
+但$30^\circ$，$-330^\circ$，$390^\circ$和$-690^\circ$本质上是一样的  
+就是说对于角$\alpha$来说$\{\forall k\in \Z\mid \alpha+k\times 360^\circ\}$终边相同
+## 弧度制
+我们发现半径为$1$的圆的周长$C=2\pi$，那么我们令$\pi=180^\circ$,用符号$rad$表示，读作：弧度  
+与角度制的转换公式$k$ $rad=\frac \pi {180^\circ}n^\circ$  
+同角度制，对于角$\alpha$来说$\{\forall k\in \Z\mid \alpha+k\times 2\pi \}$终边相同 
+### 弧长公式
+![](https://cdn.luogu.com.cn/upload/image_hosting/azd91geu.png)  
+$l=\overset{\frown}{BD}=|\alpha|R$
+>#### 证明
+>$l=\overset{\frown}{BD}=2\pi R\times\frac {|\alpha|}{2\pi}=|\alpha|R$
+
+## 定义
+在平面直角坐标系上画一个半径为$1$的圆（单位圆），对于任意角$\alpha$，终边交圆的坐标设为$P(x,y)$，定义纵坐标为正弦值，横坐标为余弦值，比值为正切值  
+![](https://cdn.luogu.com.cn/upload/image_hosting/azd91geu.png)  
+- $\sin \alpha=y$
+- $\cos \alpha=x$
+- $\tan \alpha=\frac y x(x \ne 0)$
+
+正弦函数，余弦函数，正切函数统称为三角函数  
+### 平方关系
+$\sin^2\alpha+\cos^2\alpha=1$
+>#### 证明
+>由勾股定理$x^2+y^2=R^2=1$
+
+### 商数关系
+$\tan\alpha=\frac {\sin\alpha}{\cos\alpha}$
+>#### 证明
+>由定义，显然
+
+## 图像与性质
+### 正弦函数
+![](https://cdn.luogu.com.cn/upload/image_hosting/e8nilga4.png)  
+### 余弦函数
+![](https://cdn.luogu.com.cn/upload/image_hosting/cwv8tq50.png)  
+### 正切函数
+![](https://cdn.luogu.com.cn/upload/image_hosting/vx9hhaf2.png)  
+注：当$x=\frac \pi 2+k\pi(k\in \Z)$时，$\tan(x)$无意义
+### 周期
+>#### 定义
+>函数$f(x)$的定义域为$x\in D$，若存在一个非零常数$T$，使每个$x\in D，x+T\in D$都有$f(x)=f(x+T)$，那么$f(x)$叫做周期函数，非零常数$T$是这个函数的周期  
+>如果函数$f(x)$的所有周期中，存在一个最小的正数，那么这个数是$f(x)$的最小正周期  
+>简单来说就是函数的值是循环的
+
+- 正弦函数是周期函数，$2k\pi(k\in \Z且k\ne 0)$都是它的周期，最小正周期是$2\pi$
+- 余弦函数是周期函数，$2k\pi(k\in \Z且k\ne 0)$都是它的周期，最小正周期是$2\pi$
+- 正切函数是周期函数，$k\pi(k\in \Z且k\ne 0)$都是它的周期，最小正周期是$\pi$
+### 函数定义域、值域与最值
+|   |$\sin$  |$\cos$  |$\tan$    |
+|:-:|:------:|:------:|:--------:|
+|定义域|$R$     |$R$     |$\{x\mid x\ne\frac \pi 2+k\pi,k\in \Z\}$|
+|值域 |$[-1,1]$|$[-1,1]$|$R$         |
+|最大值 |$x=2k\pi+\frac\pi 2,k\in \Z$时$y_{max}=1$|$x=2k\pi,k\in \Z$时$y_{max}=1$|无|
+|最小值 |$x=2k\pi-\frac\pi 2,k\in \Z$时$y_{min}=-1$|$x=2k\pi+\pi,k\in \Z$时$y_{min}=-1$|无|
+### 奇偶性
+>#### 定义
+>令函数定义域为$D$  
+>若$\forall x\in D,-x\in D$，都有$f(x)=-f(-x)$，那么这个函数是奇函数  
+>若$\forall x\in D,-x\in D$，都有$f(x)=f(-x)$，那么这个函数是偶函数
+
+- 正弦函数是奇函数
+- 余弦函数是偶函数
+- 正切函数是奇函数
+### 单调性
+>#### 定义
+>若函数$f(x)$的定义域为$I$，区间$D\subseteq I$，若$\forall x_1,x_2\in D$，当$x_1<x_2$时，都有$f(x_1)<f(x_2)$，那么$f(x)$在区间$D$上单调递增  
+>若函数$f(x)$的定义域为$I$，区间$D\subseteq I$，若$\forall x_1,x_2\in D$，当$x_1<x_2$时，都有$f(x_1)>f(x_2)$，那么$f(x)$在区间$D$上单调递减  
+
+$k\in \Z$  
+- 正弦函数在$[2k\pi-\frac \pi 2,2k\pi+\frac \pi 2]$上单调递增，在$[2k\pi+\frac \pi 2,2k\pi+\frac{3\pi}2]$上单调递减
+- 余弦函数在$[2k\pi-\pi,2k\pi]$上单调递增，在$[2k\pi,2k\pi+\pi]$上单调递减
+- 正切函数在每一个区间$(k\pi-\frac \pi 2,k\pi+\frac\pi 2)$上单调递增
+### 对称性
+$k\in \Z$   
+- 正弦函数的对称轴方程$x=k\pi+\frac\pi2$
+- 余弦函数的对称轴方程$x=k\pi$
+- 正切函数无对称轴
+## 诱导公式
+### 诱导公式1
+$k\in \Z$  
+- $\sin(\alpha+2k\pi)=\sin\alpha$
+- $\cos(\alpha+2k\pi)=\cos\alpha$
+- $\tan(\alpha+2k\pi)=\tan\alpha$
+>#### 证明1
+>由三角函数周期性，或直接观察图像
+
+>#### 证明2
+>由三角函数定义，取值取决于终边，又由于$\{\forall k\in Z\mid \alpha+k\times 2\pi \}$终边相同，得证
+
+### 诱导公式2
+- $\sin(\pi+\alpha)=-\sin\alpha$
+- $\cos(\pi+\alpha)=-\cos\alpha$
+- $\tan(\pi+\alpha)=\tan\alpha$
+>#### 证明
+>![](https://cdn.luogu.com.cn/upload/image_hosting/04pi8d15.png)  
+>由定义$B(\cos\alpha,\sin\alpha)$  
+>显然$C(\cos(\alpha+\pi),\sin(\alpha+\pi))=(-\cos\alpha,-\sin\alpha)$  
+>前两个就得证了，最后一个$\tan(\pi+\alpha)=\frac {\sin(\pi+\alpha)}{\cos(\pi+\alpha)}=\frac {-\sin\alpha}{-\cos\alpha}=\tan\alpha$
+
+### 诱导公式3
+- $\sin(-\alpha)=-\sin\alpha$
+- $\cos(-\alpha)=\cos\alpha$
+- $\tan(-\alpha)=-\tan\alpha$
+>#### 证明1
+>由三角函数周期性，或直接观察图像
+
+>#### 证明2
+>![](https://cdn.luogu.com.cn/upload/image_hosting/d5hftox7.png)  
+>$\alpha=-\beta$  
+>由定义$B(\cos\alpha,\sin\alpha)$  
+>显然$C(\cos\beta,\sin\beta)=(\cos(-\alpha),\sin(-\alpha))=(\cos\alpha,-\sin\alpha)$  
+>前两个就得证了，最后一个$\tan(-\alpha)=\frac {\sin(-\alpha)}{\cos(-\alpha)}=\frac {-\sin\alpha}{\cos\alpha}=-\tan\alpha$
+
+### 诱导公式4
+- $\sin(\pi-\alpha)=\sin\alpha$
+- $\cos(\pi-\alpha)=-\cos\alpha$
+- $\tan(\pi-\alpha)=-\tan\alpha$
+>#### 证明
+>$\sin(-\alpha)=-\sin\alpha$（诱导公式三），$\sin(\pi+\alpha)=-\sin\alpha$（诱导公式二），所以$\sin(\pi-\alpha)=\sin(\pi+(-\alpha))=-\sin(-\alpha)=\sin\alpha$  
+>$\cos(-\alpha)=\cos\alpha$（诱导公式三），$\cos(\pi+\alpha)=-\cos\alpha$（诱导公式二），所以$\cos(\pi-\alpha)=\cos(\pi+(-\alpha))=-\cos(-\alpha)=-\cos\alpha$  
+>$\tan(\pi-\alpha)=\frac{\sin(\pi-\alpha)}{\cos(\pi-\alpha)}=\frac{\sin\alpha}{-\cos\alpha}=-\tan\alpha$
+
+### 诱导公式5
+- $\sin(\frac\pi2-\alpha)=\cos\alpha$
+- $\cos(\frac\pi2-\alpha)=\sin\alpha$
+>#### 证明
+>![](https://cdn.luogu.com.cn/upload/image_hosting/6bvwf8u1.png)  
+>图示中$\angle FOE=\frac\pi2-\alpha,\angle FOE+\beta=\frac\pi2,BE\perp OE,FD\perp OD$  
+>有$\alpha=\beta,\triangle ODF\cong\triangle OEB(AAS)$  
+>由三角函数的定义$BE=\sin\alpha,OE=\cos\alpha,DF=\cos(\frac\pi2-\alpha),OD=\sin(\frac\pi2-\alpha)$
+>由全等得$\sin(\frac\pi2-\alpha)=OD=OE=\cos\alpha,\cos(\frac\pi2-\alpha)=DF=BE=\sin\alpha$
+
+### 诱导公式6
+- $\sin(\frac\pi2+\alpha)=\cos\alpha$
+- $\cos(\frac\pi2+\alpha)=-\sin\alpha$
+>#### 证明
+>$\cos(-\alpha)=\cos\alpha$（诱导公式三），$\sin(\frac\pi2-\alpha)=\cos\alpha$（诱导公式五），所以$\sin(\frac\pi2+\alpha)=\sin(\frac\pi2-(-\alpha))=\cos(-\alpha)=\cos\alpha$  
+>$\sin(-\alpha)=-\sin\alpha$（诱导公式三），$\cos(\frac\pi2-\alpha)=\sin\alpha$（诱导公式五），所以$\cos(\frac\pi2+\alpha)=\cos(\frac\pi2-(-\alpha))=\sin(-\alpha)=-\sin\alpha$
+
+## 一些推导
+### 两角和与差的正余弦
+- $\sin(\alpha+\beta)=\sin\alpha\cos\beta+\cos\alpha\sin\beta$
+- $\cos(\alpha+\beta)=\cos\alpha\cos\beta-\sin\alpha\sin\beta$
+- $\sin(\alpha-\beta)=\sin\alpha\cos\beta-\cos\alpha\sin\beta$
+- $\cos(\alpha-\beta)=\cos\alpha\cos\beta+\sin\alpha\sin\beta$
+>#### 证明
+>![](https://cdn.luogu.com.cn/upload/image_hosting/519wmk9o.png)  
+>如图$AC\perp OC,BD\perp OA$  
+>由三角函数的定义$AC=\sin\alpha,OC=\cos\alpha,BD=\sin\beta,OD=\cos\beta$  
+>做辅助线$BE\perp OC,DF\perp BE,DG\perp OC$所求$\sin(\alpha+\beta)=BE,cos(\alpha+\beta)=OE$
+>
+>##### 两角和正弦值
+>>$BE=BF+EF=BF+DG$
+>>- 由相似$\triangle OGD\sim\triangle OCA,DG=AC\times\frac {OD}{OA}=AC\times OD$
+>>- 在$Rt_{\triangle BFD}$中有$BF=\cos\angle FBD\times BD$
+>>- $\angle FBD=\frac\pi2-\angle BDF=\angle FDO=\alpha$    
+>>
+>>故$\sin(\alpha+\beta)=BE=BF+DG=\cos\alpha\times BD+AC\times OD=\sin\alpha\cos\beta+\cos\alpha\sin\beta$
+>
+>##### 两角和余弦值
+>>$OE=OG-EG=OG-DF$
+>>- 由相似$\triangle OGD\sim\triangle OCA,OG=OC\times\frac {OD}{OA}=OC\times OD$
+>>- 在$Rt_{\triangle BFD}$中有$DF=\sin\angle FBD\times BD$
+>>- $\angle FBD=\frac\pi2-\angle BDF=\angle FDO=\alpha$
+>>
+>>故$\cos(\alpha+\beta)=OE=OG-DF=OC\times OD-\sin\alpha\times BD=\cos\alpha\cos\beta-\sin\alpha\sin\beta$
+>
+>##### 两角差正弦值
+>>$\sin(-\alpha)=-\sin\alpha,\cos(-\alpha)=\cos\alpha$（诱导公式三）  
+>>$\sin(\alpha-\beta)=\sin(\alpha+(-\beta))=\sin\alpha\cos(-\beta)+\cos\alpha\sin(-\beta)=\sin\alpha\cos\beta-\cos\alpha\sin\beta$
+>
+>##### 两角和余弦值
+>>$\sin(-\alpha)=-\sin\alpha,\cos(-\alpha)=\cos\alpha$（诱导公式三）  
+>>$\cos(\alpha-\beta)=\cos(\alpha+(-\beta))=\cos\alpha\cos(-\beta)-\sin\alpha\sin(->>\beta)=\cos\alpha\cos\beta+\sin\alpha\sin\beta$
+>>
+>证毕
+
+### 两角和与差的正切
+- $\tan(\alpha+\beta)=\frac{\tan\alpha+\tan\beta}{1-\tan\alpha\tan\beta}$
+- $\tan(\alpha-\beta)=\frac{\tan\alpha-\tan\beta}{1+\tan\alpha\tan\beta}$
+>#### 证明
+>由两角和的正弦值  
+>$\sin(\alpha+\beta)=\sin\alpha\cos\beta+\cos\alpha\sin\beta$  
+>$\cos(\alpha+\beta)=\cos\alpha\cos\beta-\sin\alpha\sin\beta$  
+>得$\tan(\alpha+\beta)=\frac {\sin(\alpha+\beta)}{\cos(\alpha+\beta)}=\frac {\sin\alpha\cos\beta+\cos\alpha\sin\beta}{\cos\alpha\cos\beta-\sin\alpha\sin\beta}$  
+>简便一些，用换元法令$a=\sin\alpha,b=\cos\alpha,c=\sin\beta,d=\cos\beta$  
+>加法$\tan(\alpha+\beta)=\frac {ad+bc}{bd-ac}=\frac {\frac {ad+bc}{bd}}{\frac{bd-ac}{bd}}=\frac{\frac ab+\frac cd}{1-\frac {ac}{bd}}=\frac{\tan\alpha+\tan\beta}{1-\tan\alpha\tan\beta}$  
+>减法$\tan(\alpha-\beta)=\tan(\alpha+(-\beta))=\frac{\tan\alpha+\tan(-\beta)}{1-\tan\alpha\tan(-\beta)}$  
+>由$\tan(-\alpha)=-\tan\alpha$（诱导公式三）
+>得$\tan(\alpha-\beta)=\frac{\tan\alpha+\tan(-\beta)}{1-\tan\alpha\tan(-\beta)}=\frac{\tan\alpha-\tan\beta}{1+\tan\alpha\tan\beta}$  
+
+### 倍角公式
+- $\sin2\alpha=2\sin\alpha\cos\alpha$
+- $\cos2\alpha=\cos^2\alpha-\sin^2\alpha=2\cos^2\alpha-1=1-2\sin^2\alpha$
+- $\tan2\alpha=\frac{2\tan\alpha}{1-\tan^2\alpha}$
+### 正弦定理
+对于任意三角形$\triangle ABC$角$A,B,C$对边分别为$a,b,c$,有  
+$\frac a {\sin \angle A}=\frac b {\sin \angle B}=\frac c {\sin \angle C}=2R$  
+其中$R$为外接圆半径
+>#### 证明
+>![](https://cdn.luogu.com.cn/upload/image_hosting/cacuifyq.png)  
+>这里以$C$为例  
+>如图构造$\triangle ABC$的外接圆，过点$B$作直径$BD$，$\angle C=\angle D$（圆周角）$DA\perp AB$  
+>$\frac c{\sin\angle C}=\frac {AB}{\sin \angle D}=\frac {AB}{\frac {AB}{BD}}=BD=2R$  
+>其它同理
+
+### 余弦定理
+对于任意三角形$\triangle ABC$角$A,B,C$对边分别为$a,b,c$,有  
+- $a^2=b^2+c^2-2bc\cos\angle A$
+- $b^2=a^2+c^2-2ac\cos\angle B$
+- $c^2=a^2+b^2-2ab\cos\angle C$
+>#### 证明
+>见初中部分余弦定理得  
+>$\cos\angle A=\frac {b^2+c^2-a^2} {2bc}$  
+>$2bc\cos=b^2+c^2-a^2$  
+>$a^2=b^2+c^2-2bc\cos\angle A$  
+>其它同理可证
+
+# 三角函数竞赛部分&大学部分
+## 前言
+如果你还没上高中或不搞竞赛，不建议阅读
+## 其余的函数
+- $\sin x$，表示$x$的正弦$(sine)$
+- $\cos x$，表示$x$的余弦$(cosine)$
+- $\tan x$，表示$x$的正切$(tangent)$
+- $\cot x$，表示$x$的余切，$\cot x=(\tan x)^{-1}$，$(cotangent)$
+- $\sec x$，表示$x$的正割，$\sec x=(\cos x)^{-1}$，$(secant)$
+- $\csc x$，表示$x$的余割，$\csc x=(\sin x)^{-1}$，$(cosecant)$
+- $\arcsin x$，表示$x$的反正弦，$y=\arcsin x\iff x=\sin y$，$(arcsine)$
+- $\arccos x$，表示$x$的反余弦，$y=\arccos x\iff x=\cos y$，$(arccosine)$
+- $\arctan x$，表示$x$的反正切，$y=\arctan x\iff x=\tan y$，$(arctangent)$
+- $arccot$ $x$，表示$x$的反余切，$y=arccot$ $x\iff x=\cot y$，$(arccotangent)$
+- $arcsec$ $x$，表示$x$的反正割，$y=arcsec$ $x\iff x=\sec y$，$(arcsecant)$
+- $arccsc$ $x$，表示$x$的反余割，$y=arccsc$ $x\iff x=\csc y$，$(arccosecant)$
+## 双曲函数(物理)
+- $\sinh x$，表示$x$的双曲正弦
+- $\cosh x$，表示$x$的双曲余弦
+- $\tanh x$，表示$x$的双曲正切
+- $\coth x$，表示$x$的双曲余切，$\coth x=(\tanh x)^{-1}$
+### 定义
+类比三角函数，只不过并不是交于单位圆上，而是双曲线$(x^2-y^2=1)$上
+![](https://cdn.luogu.com.cn/upload/image_hosting/ecqlhy71.png)  
+若$B(x,y)$，则$\sinh\alpha=y,\cosh\alpha=x$  
+注意$\alpha$是双曲角，就是$\alpha=2S_{扇形面积}$，所以没有周期等
+### 图像
+![](https://cdn.luogu.com.cn/upload/image_hosting/ez8tw65n.png) 
+### 性质
+|   |$sinh$|$cosh$    |$tanh$  |
+|:-:|:----:|:--------:|:------:|
+|定义域|$R$   |$R$       |$R$     |
+|值域 |$R$   |$[1,+\infty]$|$(-1,1)$|
+|奇偶性|奇函数   |偶函数       |奇函数     |
+|单调性|单调递增  |在$[-\infty,0]$上单调递减，在$[0,+\infty]$上单调递增         |单调递增    |
+|周期性|无     |无         |无       |
+#### 应用
+一般用于求某条线的自然下垂率
+## 复数相关
+单位根相关
+结论：方程$x^n=1(x\in C)$解（单位根）共$n$个，分别为$\omega_n^1,\omega_n^2,\omega_n^3,......,\omega_n^{n-1},\omega_n^n$,有公式$\omega_n^k=\cos 2\pi\frac kn+i\times\sin 2\pi\frac kn=e^{i2\pi\frac kn}$  
+详见: <http://oi-wiki.com/math/complex/#%E5%8D%95%E4%BD%8D%E6%A0%B9>
+## 高等数学相关
+- $\sin x=\frac {e^{ix}-e^{-ix}}{2i}$
+- $\sinh x=\frac {e^{x}-e^{-x}}{2}$
+- $\int_0^{2k\pi+\pi} \sin x \mathop{} \! \mathrm{d} x=2(k\in \N)$
+- $\int_0^{2k\pi} \sin x \mathop{} \! \mathrm{d} x=0(k\in \N)$
+- $\int_0^{2k\pi+\pi} \cos x \mathop{} \! \mathrm{d} x=0(k\in \N)$
+- $\int_0^{2k\pi} \cos x \mathop{} \! \mathrm{d} x=0(k\in \N)$
+- $\int_0^{2k\pi+\frac\pi2} \cos x \mathop{} \! \mathrm{d} x=1(k\in \N)$
+- $\sin'x=\cos x$
+- $\sin''x=\cos'x=-\sin x$
+- $\sin'''x=\cos''x=-\sin'x=-\cos x$
+- $\sin''''x=\cos'''x=-\sin''x=-\cos'x=\sin x$
+- $$\sin^{(k)} x = \begin{cases}
+  \cos x & k\equiv1(\bmod 4) \\
+  -\sin x & k\equiv2(\bmod 4) \\
+  -\cos x & k\equiv3(\bmod 4)\\
+  \sin x & k\equiv0(\bmod 4)
+  \end{cases}(k\in \N^+)$$
+## 泰勒展开
+- $\sin \alpha=\frac \alpha {1!}-\frac {\alpha^3} {3!}+\frac {\alpha^5} {5!}-\frac {\alpha^7} {7!}+...=\sum\limits_{i=0}^{+\infty}(-1)^i\frac {\alpha^{2i+1}}{(2i+1)!}$（无穷多）（弧度制）
+- $\cos \alpha=\frac {\alpha^0} {0!}-\frac {\alpha^2} {2!}+\frac {\alpha^4} {4!}-\frac {\alpha^6} {6!}+...=\sum\limits_{i=0}^{+\infty}(-1)^i\frac {\alpha^{2i}}{(2i)!}$（无穷多）（弧度制）
+- 注：$k!=k\times(k-1)\times (k-2)\times ...\times 1=\prod\limits_{i=1}^ki$，特殊地$0!=1$
+>### 简述泰勒展开  
+>泰勒展开就是用多项式趋近某个函数，但前提要求该函数连续且可导  
+>泰勒级数公式  
+>$$f(x) = \sum_{n=0}^{\infty} \frac{f^{(n)}(a)}{n!}(x-a)^n+R_n$$
+>如果你在$a=0$点展开（也叫麦克劳林公式）  
+>$$f(x) = \sum_{n=0}^{\infty} \frac{f^{(n)}(0)}{n!}x^n+R_n$$  
+>在三角函数中，由于导数是循环的，所以公式长你刚才看到的那样  
+>这个公式的精度很高，如果你只取它前几项算的话在某些场合已经很好了
+>![](https://cdn.luogu.com.cn/upload/image_hosting/qpis7jy9.png)
+>图中**蓝线为$y=\sin x$，绿线为$y=x-\frac {x^3}6+\frac {x^5}{120}-\frac {x^5}{120}+\frac {x^7}{5040}-\frac {x^9}{362880}$，红线为$x=\pm \pi$**  
+>正常来说你不知道他很正常
+# 声明
+此专栏是陈无忧受数学彭老师启发所写，全部内容及图片由陈无忧一手原创，请尊重本人的劳动成果
